@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Account;
+import model.exception.DomainException;
 
 public class Program {
 
@@ -23,14 +24,17 @@ public class Program {
 		Double withdraw = sc.nextDouble();
 		
 		Account account = new Account(number, holder, balance, withdraw);
+		try {
+			System.out.println();
+			System.out.print("Enter amount for withdraw: ");
+			Double amount = sc.nextDouble();
+			account.withdraw(amount);
+			System.out.println();
+			System.out.println(account);
 		
-		System.out.println();
-		System.out.print("Enter amount for withdraw: ");
-		Double amount = sc.nextDouble();
-		account.withdraw(amount);
-		System.out.println();
-		System.out.println(account);
-		
+		}catch (DomainException e) {
+			System.out.println(e.getMessage());
+		}
 		sc.close();
 		
 		
